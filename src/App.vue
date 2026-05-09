@@ -1,7 +1,10 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+import PokemonList from '@/components/PokemonList.vue';
+
 </script>
 
 <template>
-  <HelloWorld />
+  <main>
+    <PokemonList />
+  </main>
 </template>
