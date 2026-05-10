@@ -1,13 +1,22 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, onMounted, onUnmounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import { pokemonService } from '@/services/pokemonService';
 
 const route = useRoute();
+const router = useRouter();
 const pokemon = ref<any>(null);
 const loading = ref(true);
 
+const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+        router.push('/');
+    }
+};
+
 onMounted(async () => {
+    window.addEventListener('keydown', handleKeyDown);
+
     try {
         const name = route.params.name as string;
         pokemon.value = await pokemonService.getPokemonDetails(name);
@@ -16,7 +25,11 @@ onMounted(async () => {
     } finally {
         loading.value = false;
     }
-})
+});
+
+onUnmounted(() => {
+    window.removeEventListener('keydown', handleKeyDown);
+});
 </script>
 
 <template>
