@@ -5,7 +5,7 @@ import PokemonCard from './PokemonCard.vue';
 
 const { pokemons, loading, loadPokemons } = usePokemons();
 
-onMounted(() => loadPokemons(20));
+onMounted(() => loadPokemons(100000));
 </script>
 
 <template>

@@ -1,11 +1,13 @@
 <script setup lang="ts">
+import PokemonSearchBar from './components/PokemonSearchBar.vue';
+
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-100 font-sans">
     <header class="bg-red-400 text-white p-6 mb-8">
     <div class="container flex items-center justify-between">
-      <a href="/">
+      <router-link to="/">
       <h1 class="text-3xl font-bold tracking-wider flex items-center gap-2">
         <span class="bg-white rounded-full w-8 h-8 flex items-center justify-center">
           <img 
@@ -15,9 +17,9 @@
         </span>
         Vue Pokedex
       </h1>
-      </a>
-
+      </router-link>
     </div>
+    <PokemonSearchBar />
     </header>
 
     <router-view />

@@ -3,7 +3,7 @@ import type { Pokemon } from "@/types/Pokemon";
 const BASE_URL = 'https://pokeapi.co/api/v2';
 
 export const pokemonService = {
-    async getPokemons(limit = 20): Promise<Pokemon[]> {
+    async getPokemons(limit = 100000): Promise<Pokemon[]> {
         const response = await fetch(`${BASE_URL}/pokemon?limit=${limit}`);
         const data = await response.json();
 
