@@ -3,6 +3,7 @@
 A Pokedex built with **Vue 3**, **TypeScript**, and **Tailwind CSS**.
 
 ## Features
+- **Dynamic Routing:** Individual detail pages for every Pokemon using `vue-router`.
 - Live data fetching from [PokeAPI](https://pokeapi.co/).
 - Type-safe architecture using TypeScript.
 - Unit testing using Vitest.
@@ -25,6 +26,7 @@ Launches the test runner (Vitest) to verify API services and logic.
 
 ## Tech Stack
 - Vue 3
+- Vue Router 4
 - Vite
 - Tailwind CSS
 - Vitest (Unit testing)
