@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { pokemonService } from '@/services/pokemonAPI';
+import { pokemonService } from '@/services/pokemonService';
 import type { Pokemon } from '@/types/Pokemon';
 
 export function usePokemons() {

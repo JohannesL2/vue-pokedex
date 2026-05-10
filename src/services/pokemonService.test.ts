@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { pokemonService } from './pokemonAPI';
+import { pokemonService } from './pokemonService';
 
 global.fetch = vi.fn();
 

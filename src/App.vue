@@ -19,9 +19,10 @@ import PokemonList from '@/components/PokemonList.vue';
 
     </div>
     </header>
+
+    <router-view />
     <main class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
-        <PokemonList />
       </div>
     </main>
 
