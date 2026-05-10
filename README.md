@@ -1,4 +1,4 @@
-# Vue Pokedex <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" width="32" height="32" align="center"/>
+# <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" width="30" align="center"> Vue Pokedex
 
 A Pokedex built with **Vue 3**, **TypeScript**, and **Tailwind CSS**.
 
@@ -7,8 +7,7 @@ A Pokedex built with **Vue 3**, **TypeScript**, and **Tailwind CSS**.
 - Type-safe architecture using TypeScript.
 - Unit testing using Vitest.
 
-In the project directory, you can run:
-
+## In the project directory, you can run:
 ### `npm run dev`
 Runs the app in the development mode.  
 Open [http://localhost:5173](http://localhost:5173) to view it in your browser. The page will reload when you make changes.
