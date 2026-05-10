@@ -4,7 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
-  base: '/',
+  base: '/vue-pokedex/',
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
