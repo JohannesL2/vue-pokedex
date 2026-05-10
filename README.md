@@ -1,5 +1,31 @@
-# Vue 3 + TypeScript + Vite
+# Vue Pokedex <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" width="32" height="32" align="center"/>
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A Pokedex built with **Vue 3**, **TypeScript**, and **Tailwind CSS**.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Features
+- Live data fetching from [PokeAPI](https://pokeapi.co/).
+- Type-safe architecture using TypeScript.
+- Unit testing using Vitest.
+
+In the project directory, you can run:
+
+### `npm run dev`
+Runs the app in the development mode.  
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser. The page will reload when you make changes.
+
+### `npm run build`
+Builds the app for production to the `dist` folder.  
+It correctly bundles Vue in production mode and optimizes the build for the best performance.
+
+### `npm run preview`
+Locally preview the production build.  
+Use this to test if the build works correctly before deploying as a static website.
+
+### `npm run test`
+Launches the test runner (Vitest) to verify API services and logic.
+
+## Tech Stack
+- Vue 3
+- Vite
+- Tailwind CSS
+- Vitest (Unit testing)
