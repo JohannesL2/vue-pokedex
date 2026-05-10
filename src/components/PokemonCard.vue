@@ -15,7 +15,7 @@ defineProps<{
         <img 
           :src="pokemon.sprites.front_default" 
           :alt="pokemon.name" 
-          class="relative w-32 h-32 z-10"
+          class="relative w-32 h-32 z-10 pixelated"
         />
       </div>
       
