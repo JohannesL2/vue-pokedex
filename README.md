@@ -2,6 +2,8 @@
 
 A Pokedex built with **Vue 3**, **TypeScript**, and **Tailwind CSS**.
 
+![preview image](preview-image.png)
+
 ## Features
 - **Dynamic Routing:** Individual detail pages for every Pokemon using `vue-router`.
 - Live data fetching from [PokeAPI](https://pokeapi.co/).
