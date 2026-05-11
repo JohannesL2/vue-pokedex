@@ -27,14 +27,14 @@ const handleSearch = () => {
 </script>
 
 <template>
-    <div class="relative max-w-md mx-auto mb-8">
+    <div class="relative max-w-md mx-auto">
         <form @submit.prevent="handleSearch" class="relative group">
             <input
                 v-model="searchQuery"
                 list="pokemon-suggestions"
                 type="text"
                 placeholder="Search by name or ID"
-                class="w-full px-12 py-4 bg-white border-2 border-slate-200 rounded-full shadow-sm text-black"
+                class="w-full pl-10 pr-20 md:pr-24 py-3 md:py-4 bg-white border-2 border-slate-200 rounded-full shadow-sm text-black text-sm md:text-base focus:border-red-500 outline-none transition-all"
             />
 
             <datalist id="pokemon-suggestions">
