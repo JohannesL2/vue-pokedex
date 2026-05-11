@@ -18,7 +18,10 @@ import PokemonSearchBar from './components/PokemonSearchBar.vue';
         Vue Pokedex
       </h1>
       </router-link>
-      <PokemonSearchBar />
+
+      <div class="w-full md:flex-1 flex justify-center md:justify-end">
+        <PokemonSearchBar class="w-full max-w-md"/>
+      </div>
     </div>
     </header>
 

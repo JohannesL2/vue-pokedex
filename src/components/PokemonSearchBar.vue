@@ -27,7 +27,7 @@ const handleSearch = () => {
 </script>
 
 <template>
-    <div class="relative max-w-md mx-auto">
+    <div class="relative w-full max-w-md md:mx-0">
         <form @submit.prevent="handleSearch" class="relative group">
             <input
                 v-model="searchQuery"
