@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
 import { usePokemonStore } from '@/stores/pokemonStore';
 import PokemonCard from './PokemonCard.vue';
 
