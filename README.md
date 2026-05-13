@@ -5,6 +5,7 @@ A Pokedex built with **Vue 3**, **TypeScript**, and **Tailwind CSS**.
 ![preview image](preview-image.png)
 
 ## Features
+- **Global State Management:** Powered by `Pinia` for efficient data caching and persistence between routes.
 - **Dynamic Routing:** Individual detail pages for every Pokemon using `vue-router`.
 - Live data fetching from [PokeAPI](https://pokeapi.co/).
 - Type-safe architecture using TypeScript.
@@ -28,6 +29,7 @@ Launches the test runner (Vitest) to verify API services and logic.
 
 ## Tech Stack
 - Vue 3
+- Pinia (State Management)
 - Vue Router 4
 - Vite
 - Tailwind CSS
