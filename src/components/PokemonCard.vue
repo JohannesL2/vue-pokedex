@@ -9,8 +9,8 @@ defineProps<{
 <template>
     <router-link :to="{ name: 'pokemon-detail', params: { name: pokemon.name } }" class="block">
     <div class="group border p-4 rounded-xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 bg-white">
-      <div class="relative flex justify-center bg-slate-50 rounded-lg p-2 sm:p-4 mb-4 overflow-hidden">
-        <div class="absolute inset-0 bg-slate-200/50 rounded-full scale-75 group-hover:scale-90 transition-transform duration-500"></div>
+      <div class="relative flex justify-center p-2 sm:p-4 mb-4 overflow-hidden">
+        <div class="absolute h-[80%] aspect-square bg-slate-200/50 rounded-full scale-100 group-hover:scale-110 transition-transform duration-500 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
         
         <img 
           :src="pokemon.sprites.front_default" 
