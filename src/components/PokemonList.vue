@@ -18,12 +18,20 @@ const handleLoadMore = async () => {
 </script>
 
 <template>
-    <div v-if="pokemons.length > 0" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
+    <div v-if="pokemons.length > 0" 
+        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
         <PokemonCard
             v-for="p in pokemons"
             :key="p.id"
             :pokemon="p"
+            class="transform transition-all duration-300 hover:-translate-y-1 hover:bg-black rounded-2xl"
         />
+
+        <template v-if="loading && pokemons.length > 0">
+            <div v-for="i in 8" :key="'skeleton-' + i"
+                class="h-64 bg-slate-200 animate-pulse rounded-2xl border-2 border-slate-100">
+            </div>
+        </template>
     </div>
 
     <div class="mt-10 flex flex-col items-center min-h-[100px] justify-center">
