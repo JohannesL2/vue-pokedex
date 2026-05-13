@@ -5,7 +5,7 @@ import PokemonSearchBar from './components/PokemonSearchBar.vue';
 
 <template>
   <div class="min-h-screen bg-gray-100 font-sans">
-    <header class="bg-red-400 text-white p-6 mb-8">
+    <header class="bg-red-400 text-white p-6 mb-4">
     <div class="container flex flex-col md:flex-row mx-auto items-center justify-between gap-4">
       <router-link to="/">
       <h1 class="text-3xl font-bold tracking-wider flex items-center gap-2">
