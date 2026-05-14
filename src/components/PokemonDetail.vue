@@ -60,13 +60,13 @@ onUnmounted(() => {
         <button
           @click="router.push({ name: 'pokemon-detail', params: { name: pokemon.id - 1 } })"
           :disabled="pokemon.id <= 1"
-          class="px-4 py-2 bg-slate-100 rounded-lg hover:bg-slate-200 disabled:opacity-30 disabled:cursor-not-allowed font-bold"
+          class="px-4 py-2 bg-slate-100 rounded-lg hover:bg-slate-200 disabled:opacity-30 disabled:cursor-not-allowed font-bold cursor-pointer"
         >
           Previous
         </button>
         <button
           @click="router.push({ name: 'pokemon-detail', params: { name: pokemon.id + 1 } })"
-          class="px-4 py-2 bg-slate-100 rounded-lg hover:bg-slate-200 font-bold"
+          class="px-4 py-2 bg-slate-100 rounded-lg hover:bg-slate-200 font-bold cursor-pointer"
         >
           Next
         </button>
