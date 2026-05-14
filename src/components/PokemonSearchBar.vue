@@ -49,7 +49,7 @@ const handleSearch = () => {
 
             <button
                 type="submit"
-                class="absolute right-3 top-1/2 -translate-y-1/2 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-red-600 active:scale-95 transition-all shadow-md"
+                class="absolute right-3 top-1/2 -translate-y-1/2 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold hover:bg-red-600 active:scale-95 transition-all shadow-md cursor-pointer"
             >
               Search
             </button>
