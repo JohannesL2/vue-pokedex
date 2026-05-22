@@ -1,8 +1,9 @@
 # <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" width="30" align="center"> Vue Pokedex
 
-A Pokedex built with **Vue 3**, **TypeScript**, and **Tailwind CSS**.
+<img width="1200" height="600" alt="vue-pokedex-screenshot" src="https://github.com/user-attachments/assets/6b58909e-7284-495f-8f0b-5eb8bebd88b7" />
 
-![preview image](preview-image.png)
+
+A Pokedex built with **Vue 3**, **TypeScript**, and **Tailwind CSS**.
 
 ## Features
 - **Global State Management:** Powered by `Pinia` for efficient data caching and persistence between routes.
