@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import { usePokemonStore } from '@/stores/pokemonStore';
 import PokemonCard from './PokemonCard.vue';
 
 const pokemonStore = usePokemonStore();
+const showInitialSkeletons = computed(
+    () => pokemonStore.loading && pokemonStore.pokemons.length === 0,
+);
 
 onMounted(() => {
     if (pokemonStore.pokemons.length === 0) {
@@ -13,7 +16,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <div v-if="pokemonStore.pokemons.length > 0" 
+    <div v-if="pokemonStore.pokemons.length > 0 || showInitialSkeletons"
         class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8 p-4">
         <PokemonCard
             v-for="p in pokemonStore.pokemons"
@@ -22,7 +25,7 @@ onMounted(() => {
             class="transform transition-all duration-300 hover:-translate-y-1 hover:bg-black rounded-2xl"
         />
 
-        <template v-if="pokemonStore.loading && pokemonStore.pokemons.length > 0">
+        <template v-if="pokemonStore.loading">
             <div v-for="i in 8" :key="'skeleton-' + i"
                 class="h-64 bg-slate-200 animate-pulse rounded-2xl border-2 border-slate-100">
             </div>
