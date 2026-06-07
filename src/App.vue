@@ -32,21 +32,25 @@ import PokemonSearchBar from './components/PokemonSearchBar.vue';
     </main>
 
     <footer class="mt-20 pb-10 text-center text-slate-400 text-sm">
-      <div class="flex justify-center gap-4 mb-2">
-        <div class="w-2 h-2 bg-red-400 rounded-full"></div>
-        <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
-        <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
-      </div>
-      Built by JohannesL2
-      <p class="text-xs opacity-75">Frontend Developer | Vue 3 & TypeScript</p>
-      <p class="mt-2 text-[10px] uppercase tracking-widest font-bold text-slate-300">
-      Stockholm, Sweden 2026
-      </p>
-      <a href="https://github.com/JohannesL2/vue-pokedex" 
-   target="_blank" 
-   class="mt-4 inline-block hover:text-red-500 transition-colors duration-300 font-medium border-b border-transparent hover:border-red-500">
-   View on GitHub →
-      </a>
-    </footer>
+  <div class="flex justify-center gap-4 mb-3">
+    <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+    <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+  </div>
+  <p class="font-medium">Open Source Project</p>
+  <p class="text-xs opacity-75 mt-0.5">Vue 3, TypeScript & Tailwind CSS</p>
+  <div class="mt-4 flex justify-center gap-6 font-medium">
+    <a href="https://github.com/JohannesL2/vue-pokedex" 
+       target="_blank" 
+       class="hover:text-red-500 transition-colors duration-300 border-b border-transparent hover:border-red-500">
+      GitHub Repository →
+    </a>
+    <a href="https://github.com/JohannesL2/vue-pokedex/blob/main/LICENSE" 
+       target="_blank" 
+       class="hover:text-slate-200 transition-colors duration-300">
+      MIT License
+    </a>
+  </div>
+</footer>
   </div>
 </template>
