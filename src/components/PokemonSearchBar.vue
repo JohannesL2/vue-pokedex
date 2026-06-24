@@ -1,27 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { usePokemonStore } from '@/stores/pokemonStore';
 
-const router = useRouter();
-const searchQuery = ref('');
-const allPokemonNames = ref<string[]>([]);
-
-onMounted(async () => {
-    try {
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=100000');
-        const data = await res.json();
-        allPokemonNames.value = data.results.map((p: any) => p.name);
-    } catch (err) {
-        console.error('Could not get search suggestions', err);
-    }
-})
+const pokemonStore = usePokemonStore();
 
 const handleSearch = () => {
-    const q = searchQuery.value.trim().toLowerCase();
+    const q = pokemonStore.searchQuery.trim().toLowerCase();
 
     if (q) {
-        router.push({ name: 'pokemon-detail', params: { name: q } });
-        searchQuery.value = '';
+        pokemonStore.searchQuery = '';
     }
 };
 </script>
@@ -30,7 +16,7 @@ const handleSearch = () => {
     <div class="relative w-full max-w-md md:mx-0">
         <form @submit.prevent="handleSearch" class="relative group">
             <input
-                v-model="searchQuery"
+                v-model="pokemonStore.searchQuery"
                 list="pokemon-suggestions"
                 type="text"
                 placeholder="Search by name or ID"
@@ -38,7 +24,7 @@ const handleSearch = () => {
             />
 
             <datalist id="pokemon-suggestions">
-                <option v-for="name in allPokemonNames" :key="name" :value="name" />
+                <option v-for="p in pokemonStore.allPokemonList" :key="p.name" :value="p.name" />
             </datalist>
 
             <div class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-red-500 transition-colors">
