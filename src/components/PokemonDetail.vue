@@ -195,6 +195,26 @@ const calculateWidth = (baseStat: number): string => {
           </div>
         </div>
       </div>
+      <div class="mt-6 w-full max-w-md bg-white p-4 rounded-xl border border-slate-100">
+        <h3 class="text-lg font-extrabold text-slate-700 mb-3 border-b pb-1 text-left uppercase tracking-wider text-xs text-slate-400">
+          Abilities
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span
+            v-for="a in pokemon.abilities"
+            :key="a.ability.name"
+            class="bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200/60 capitalize shadow-sm flex items-center"
+          >
+            {{ a.ability.name.replace('-', ' ') }}
+            <span 
+              v-if="a.is_hidden" 
+              class="text-[10px] text-slate-400 italic font-normal ml-1.5 bg-slate-200/50 px-1.5 py-0.5 rounded"
+            >
+              Hidden
+            </span>
+          </span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
