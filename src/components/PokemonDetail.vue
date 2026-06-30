@@ -112,6 +112,22 @@ const typeColorMap: Record<string, string> = {
 const getTypeColor = (typeName: string): string => {
   return typeColorMap[typeName.toLowerCase()] || 'bg-slate-500 text-white';
 };
+
+const statLabels: Record<string, string> = {
+  hp: 'HP',
+  attack: 'ATK',
+  defense: 'DEF',
+  'special-attack': 'SATK',
+  'special-defense': 'SDEF',
+  speed: 'SPD'
+};
+
+const getStatLabel = (name: string): string => statLabels[name] || name.toUpperCase();
+
+const calculateWidth = (baseStat: number): string => {
+  const percentage = Math.min((baseStat / 255) * 100, 100);
+  return `${percentage}%`;
+};
 </script>
 
 <template>
@@ -156,6 +172,27 @@ const getTypeColor = (typeName: string): string => {
         <div class="bg-slate-100 p-4 rounded-lg">
           <p class="text-slate-500 text-xs uppercase">Weight</p>
           <p class="font-bold">{{ pokemon.weight / 10 }} kg</p>
+        </div>
+      </div>
+      <div class="mt-8 w-full max-w-md bg-white p-4 rounded-xl border border-slate-100">
+        <h3 class="text-lg font-extrabold text-slate-700 mb-4 border-b pb-1 text-left uppercase tracking-wider text-xs text-slate-400">
+          Base Stats
+        </h3>
+        <div class="space-y-3.5">
+          <div v-for="s in pokemon.stats" :key="s.stat.name" class="flex items-center gap-4">
+            <span class="w-12 text-xs font-bold text-slate-500 uppercase text-left">
+              {{ getStatLabel(s.stat.name) }}
+            </span>
+            <span class="w-8 text-sm font-bold text-right text-slate-700">
+              {{ s.base_stat }}
+            </span>
+            <div class="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+              <div
+                class="h-full bg-red-500 rounded-full transition-all duration-500 ease-out"
+                :style="{ width: calculateWidth(s.base_stat) }"
+              ></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
