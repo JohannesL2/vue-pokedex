@@ -87,6 +87,31 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeyDown);
 });
+
+const typeColorMap: Record<string, string> = {
+  normal: 'bg-gray-400 text-white',
+  fire: 'bg-red-500 text-white',
+  water: 'bg-blue-500 text-white',
+  grass: 'bg-green-500 text-white',
+  electric: 'bg-yellow-400 text-black',
+  ice: 'bg-cyan-300 text-black',
+  fighting: 'bg-red-700 text-white',
+  poison: 'bg-purple-500 text-white',
+  ground: 'bg-amber-600 text-white',
+  flying: 'bg-indigo-400 text-white',
+  psychic: 'bg-pink-500 text-white',
+  bug: 'bg-lime-500 text-white',
+  rock: 'bg-stone-500 text-white',
+  ghost: 'bg-violet-700 text-white',
+  dragon: 'bg-indigo-700 text-white',
+  dark: 'bg-stone-800 text-white',
+  steel: 'bg-slate-400 text-white',
+  fairy: 'bg-pink-300 text-black',
+};
+
+const getTypeColor = (typeName: string): string => {
+  return typeColorMap[typeName.toLowerCase()] || 'bg-slate-500 text-white';
+};
 </script>
 
 <template>
@@ -112,6 +137,16 @@ onUnmounted(() => {
     <div class="flex flex-col items-center">
       <img :src="pokemon.sprites.other['official-artwork'].front_default" class="w-64 h-64" />
       <h1 class="text-4xl font-black uppercase mt-4">{{ pokemon.name }}</h1>
+      <div class="flex flex-wrap gap-2 mt-3 justify-center">
+        <span
+            v-for="t in pokemon.types"
+            :key="t.type.name"
+            :class="getTypeColor(t.type.name)"
+            class="px-4 py-1 text-xs font-bold uppercase rounded-full tracking-wider shadow-sm"
+        >
+            {{ t.type.name }}
+        </span>
+      </div>
       
       <div class="grid grid-cols-2 gap-4 mt-8 w-full text-center">
         <div class="bg-slate-100 p-4 rounded-lg">
