@@ -3,52 +3,89 @@ import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { pokemonService } from '@/services/pokemonService';
 
+interface PokemonType {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+}
+
+interface PokemonStat {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
+}
+
+interface PokemonAbility {
+  ability: {
+    name: string;
+    url: string;
+  };
+  is_hidden: boolean;
+  slot: number;
+}
+
+interface PokemonData {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  sprites: {
+    front_default: string;
+    other: {
+      'official-artwork': {
+        front_default: string;
+      };
+    };
+  };
+  types: PokemonType[];
+  stats: PokemonStat[];
+  abilities: PokemonAbility[];
+}
+
 const route = useRoute();
 const router = useRouter();
-const pokemon = ref<any>(null);
+
+const pokemon = ref<PokemonData | null>(null);
 const loading = ref(true);
 
 const fetchPokemon = async (identifier: string) => {
-    loading.value = true;
-    try {
-        pokemon.value = await pokemonService.getPokemonDetails(identifier);
-    } catch (error) {
-        console.error("Kunde inte hämta Pokémon:", error);
-    } finally {
-        loading.value = false;
-    }
+  loading.value = true;
+  try {
+    pokemon.value = await pokemonService.getPokemonDetails(identifier);
+  } catch (error) {
+    console.error("Kunde inte hämta Pokémon:", error);
+  } finally {
+    loading.value = false;
+  }
 };
 
 const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') router.push('/');
-    if (e.key === 'ArrowLeft' && pokemon.value?.id > 1) {
-        router.push({ name: 'pokemon-detail', params: { name: pokemon.value.id - 1 } });
-    }
-    if (e.key === 'ArrowRight') {
-        router.push({ name: 'pokemon-detail', params: { name: pokemon.value.id + 1 } });
-    }
+  if (!pokemon.value) return; // Validación de seguridad para TypeScript
+  if (e.key === 'Escape') router.push('/');
+  if (e.key === 'ArrowLeft' && pokemon.value.id > 1) {
+    router.push({ name: 'pokemon-detail', params: { name: pokemon.value.id - 1 } });
+  }
+  if (e.key === 'ArrowRight') {
+    router.push({ name: 'pokemon-detail', params: { name: pokemon.value.id + 1 } });
+  }
 };
 
 watch(() => route.params.name, (newName) => {
-    if (newName) fetchPokemon(newName as string);
+  if (newName) fetchPokemon(newName as string);
 });
 
-onMounted(async () => {
-    window.addEventListener('keydown', handleKeyDown);
-    fetchPokemon(route.params.name as string);
-
-    try {
-        const name = route.params.name as string;
-        pokemon.value = await pokemonService.getPokemonDetails(name);
-    } catch (error) {
-        console.error("Kunde inte hämta Pokémon:", error);
-    } finally {
-        loading.value = false;
-    }
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown);
+  fetchPokemon(route.params.name as string); 
 });
 
 onUnmounted(() => {
-    window.removeEventListener('keydown', handleKeyDown);
+  window.removeEventListener('keydown', handleKeyDown);
 });
 </script>
 
