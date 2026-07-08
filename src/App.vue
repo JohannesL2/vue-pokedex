@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import BackToTop from './components/BackToTop.vue';
 import PokemonSearchBar from './components/PokemonSearchBar.vue';
 
 </script>
@@ -26,6 +27,7 @@ import PokemonSearchBar from './components/PokemonSearchBar.vue';
     </header>
 
     <router-view />
+    <BackToTop />
     <main class="container mx-auto px-4">
       <div class="max-w-6xl mx-auto">
       </div>
