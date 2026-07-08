@@ -3,53 +3,131 @@ import { ref, onMounted, onUnmounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { pokemonService } from '@/services/pokemonService';
 
+interface PokemonType {
+  slot: number;
+  type: {
+    name: string;
+    url: string;
+  };
+}
+
+interface PokemonStat {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
+}
+
+interface PokemonAbility {
+  ability: {
+    name: string;
+    url: string;
+  };
+  is_hidden: boolean;
+  slot: number;
+}
+
+interface PokemonData {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  sprites: {
+    front_default: string;
+    other: {
+      'official-artwork': {
+        front_default: string;
+      };
+    };
+  };
+  types: PokemonType[];
+  stats: PokemonStat[];
+  abilities: PokemonAbility[];
+}
+
 const route = useRoute();
 const router = useRouter();
-const pokemon = ref<any>(null);
+
+const pokemon = ref<PokemonData | null>(null);
 const loading = ref(true);
 
 const fetchPokemon = async (identifier: string) => {
-    loading.value = true;
-    try {
-        pokemon.value = await pokemonService.getPokemonDetails(identifier);
-    } catch (error) {
-        console.error("Kunde inte hämta Pokémon:", error);
-    } finally {
-        loading.value = false;
-    }
+  loading.value = true;
+  try {
+    pokemon.value = await pokemonService.getPokemonDetails(identifier);
+  } catch (error) {
+    console.error("Kunde inte hämta Pokémon:", error);
+  } finally {
+    loading.value = false;
+  }
 };
 
 const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') router.push('/');
-    if (e.key === 'ArrowLeft' && pokemon.value?.id > 1) {
-        router.push({ name: 'pokemon-detail', params: { name: pokemon.value.id - 1 } });
-    }
-    if (e.key === 'ArrowRight') {
-        router.push({ name: 'pokemon-detail', params: { name: pokemon.value.id + 1 } });
-    }
+  if (!pokemon.value) return; // Validación de seguridad para TypeScript
+  if (e.key === 'Escape') router.push('/');
+  if (e.key === 'ArrowLeft' && pokemon.value.id > 1) {
+    router.push({ name: 'pokemon-detail', params: { name: pokemon.value.id - 1 } });
+  }
+  if (e.key === 'ArrowRight') {
+    router.push({ name: 'pokemon-detail', params: { name: pokemon.value.id + 1 } });
+  }
 };
 
 watch(() => route.params.name, (newName) => {
-    if (newName) fetchPokemon(newName as string);
+  if (newName) fetchPokemon(newName as string);
 });
 
-onMounted(async () => {
-    window.addEventListener('keydown', handleKeyDown);
-    fetchPokemon(route.params.name as string);
-
-    try {
-        const name = route.params.name as string;
-        pokemon.value = await pokemonService.getPokemonDetails(name);
-    } catch (error) {
-        console.error("Kunde inte hämta Pokémon:", error);
-    } finally {
-        loading.value = false;
-    }
+onMounted(() => {
+  window.addEventListener('keydown', handleKeyDown);
+  fetchPokemon(route.params.name as string); 
 });
 
 onUnmounted(() => {
-    window.removeEventListener('keydown', handleKeyDown);
+  window.removeEventListener('keydown', handleKeyDown);
 });
+
+const typeColorMap: Record<string, string> = {
+  normal: 'bg-gray-400 text-white',
+  fire: 'bg-red-500 text-white',
+  water: 'bg-blue-500 text-white',
+  grass: 'bg-green-500 text-white',
+  electric: 'bg-yellow-400 text-black',
+  ice: 'bg-cyan-300 text-black',
+  fighting: 'bg-red-700 text-white',
+  poison: 'bg-purple-500 text-white',
+  ground: 'bg-amber-600 text-white',
+  flying: 'bg-indigo-400 text-white',
+  psychic: 'bg-pink-500 text-white',
+  bug: 'bg-lime-500 text-white',
+  rock: 'bg-stone-500 text-white',
+  ghost: 'bg-violet-700 text-white',
+  dragon: 'bg-indigo-700 text-white',
+  dark: 'bg-stone-800 text-white',
+  steel: 'bg-slate-400 text-white',
+  fairy: 'bg-pink-300 text-black',
+};
+
+const getTypeColor = (typeName: string): string => {
+  return typeColorMap[typeName.toLowerCase()] || 'bg-slate-500 text-white';
+};
+
+const statLabels: Record<string, string> = {
+  hp: 'HP',
+  attack: 'ATK',
+  defense: 'DEF',
+  'special-attack': 'SATK',
+  'special-defense': 'SDEF',
+  speed: 'SPD'
+};
+
+const getStatLabel = (name: string): string => statLabels[name] || name.toUpperCase();
+
+const calculateWidth = (baseStat: number): string => {
+  const percentage = Math.min((baseStat / 255) * 100, 100);
+  return `${percentage}%`;
+};
 </script>
 
 <template>
@@ -75,6 +153,16 @@ onUnmounted(() => {
     <div class="flex flex-col items-center">
       <img :src="pokemon.sprites.other['official-artwork'].front_default" class="w-64 h-64" />
       <h1 class="text-4xl font-black uppercase mt-4">{{ pokemon.name }}</h1>
+      <div class="flex flex-wrap gap-2 mt-3 justify-center">
+        <span
+            v-for="t in pokemon.types"
+            :key="t.type.name"
+            :class="getTypeColor(t.type.name)"
+            class="px-4 py-1 text-xs font-bold uppercase rounded-full tracking-wider shadow-sm"
+        >
+            {{ t.type.name }}
+        </span>
+      </div>
       
       <div class="grid grid-cols-2 gap-4 mt-8 w-full text-center">
         <div class="bg-slate-100 p-4 rounded-lg">
@@ -84,6 +172,47 @@ onUnmounted(() => {
         <div class="bg-slate-100 p-4 rounded-lg">
           <p class="text-slate-500 text-xs uppercase">Weight</p>
           <p class="font-bold">{{ pokemon.weight / 10 }} kg</p>
+        </div>
+      </div>
+      <div class="mt-8 w-full max-w-md bg-white p-4 rounded-xl border border-slate-100">
+        <h3 class="text-lg font-extrabold text-slate-700 mb-4 border-b pb-1 text-left uppercase tracking-wider text-xs text-slate-400">
+          Base Stats
+        </h3>
+        <div class="space-y-3.5">
+          <div v-for="s in pokemon.stats" :key="s.stat.name" class="flex items-center gap-4">
+            <span class="w-12 text-xs font-bold text-slate-500 uppercase text-left">
+              {{ getStatLabel(s.stat.name) }}
+            </span>
+            <span class="w-8 text-sm font-bold text-right text-slate-700">
+              {{ s.base_stat }}
+            </span>
+            <div class="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+              <div
+                class="h-full bg-red-500 rounded-full transition-all duration-500 ease-out"
+                :style="{ width: calculateWidth(s.base_stat) }"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 w-full max-w-md bg-white p-4 rounded-xl border border-slate-100">
+        <h3 class="text-lg font-extrabold text-slate-700 mb-3 border-b pb-1 text-left uppercase tracking-wider text-xs text-slate-400">
+          Abilities
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span
+            v-for="a in pokemon.abilities"
+            :key="a.ability.name"
+            class="bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-semibold border border-slate-200/60 capitalize shadow-sm flex items-center"
+          >
+            {{ a.ability.name.replace('-', ' ') }}
+            <span 
+              v-if="a.is_hidden" 
+              class="text-[10px] text-slate-400 italic font-normal ml-1.5 bg-slate-200/50 px-1.5 py-0.5 rounded"
+            >
+              Hidden
+            </span>
+          </span>
         </div>
       </div>
     </div>
