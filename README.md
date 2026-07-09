@@ -1,6 +1,6 @@
 # <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" width="30" align="center"> Vue Pokedex
 
-<img height="800" alt="vue-pokedex" src="https://github.com/user-attachments/assets/6898c6e4-417b-48e4-b2f7-17dfb4dc2a62" />
+<img height="500" alt="vue-pokedex" src="https://github.com/user-attachments/assets/6898c6e4-417b-48e4-b2f7-17dfb4dc2a62" />
 
 
 
