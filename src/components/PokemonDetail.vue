@@ -56,7 +56,7 @@ const loading = ref(true);
 const fetchPokemon = async (identifier: string) => {
   loading.value = true;
   try {
-    pokemon.value = await pokemonService.getPokemonDetails(identifier);
+    pokemon.value = await pokemonService.getPokemonDetails(identifier) as unknown as PokemonData;
   } catch (error) {
     console.error("Kunde inte hämta Pokémon:", error);
   } finally {
